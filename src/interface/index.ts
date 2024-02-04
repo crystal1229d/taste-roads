@@ -1,5 +1,5 @@
 export interface StoreType {
-  telno: string
+  tel_no: string
   cob_code_nm: string
   bizcnd_code_nm: string
   upso_nm: string
