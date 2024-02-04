@@ -1,21 +1,25 @@
-import { Inter } from "next/font/google";
-import Link from 'next/link';
+import { useState } from 'react'
 
-const inter = Inter({ subsets: ["latin"] });
+import Map from '@/components/Map'
+import Markers from '@/components/Markers'
+import StoreBox from '@/components/StoreBox'
+
+import * as stores from '@/data/store_data.json'
 
 export default function Home() {
+  const [map, setMap] = useState(null)
+  const [currentStore, setCurrentStore] = useState(null)
+  const storeData = stores['DATA']
+
   return (
     <>
-      <h1 className='font-bold'>Map Index Page</h1>
-      <ul className='px-4 py-2'>
-        <li><Link href="/stores">맛집 목록</Link></li>
-        <li><Link href="/stores/new">맛집 생성</Link></li>
-        <li><Link href="/stores/1">맛집 상세 페이지</Link></li>
-        <li><Link href="/stores/1/edit">맛집 수정 페이지</Link></li>
-        <li><Link href="/users/login">로그인 페이지</Link></li>
-        <li><Link href="/users/mypage">마이페이지</Link></li>
-        <li><Link href="/users/likes">찜한 맛집</Link></li>
-      </ul>
+      <Map setMap={setMap} />
+      <Markers
+        storeData={storeData}
+        map={map}
+        setCurrentStore={setCurrentStore}
+      />
+      <StoreBox store={currentStore} setStore={setCurrentStore} />
     </>
-  );
+  )
 }
