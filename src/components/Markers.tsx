@@ -1,8 +1,9 @@
+import { StoreType } from '@/interface'
 import { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
 
 interface MarkerProps {
   map: any
-  stores: any[]
+  stores: StoreType[]
   setCurrentStore: Dispatch<SetStateAction<any>>
 }
 
@@ -11,8 +12,8 @@ export default function Markers({ map, stores, setCurrentStore }: MarkerProps) {
     if (map) {
       stores?.map((store) => {
         // 마커 아이콘
-        const imageSrc = store?.bizcnd_code_nm
-          ? `/images/markers/${store?.bizcnd_code_nm}.png`
+        const imageSrc = store?.category
+          ? `/images/markers/${store?.category}.png`
           : '/images/markers/default.png'
         const imageSize = new window.kakao.maps.Size(40, 40)
         const imageOption = {
@@ -26,8 +27,8 @@ export default function Markers({ map, stores, setCurrentStore }: MarkerProps) {
 
         // 마커 위치
         const markerPosition = new window.kakao.maps.LatLng(
-          store?.y_dnts,
-          store?.x_cnts,
+          store?.lat,
+          store?.lng,
         )
 
         // 마커 생성
@@ -39,7 +40,7 @@ export default function Markers({ map, stores, setCurrentStore }: MarkerProps) {
         marker.setMap(map)
 
         // 마커에 커서가 오버됐을 때의 커스텀 오버레이 (인포윈도우)
-        const content = `<div class='infowindow'>${store?.upso_nm}</div>`
+        const content = `<div class='infowindow'>${store?.name}</div>`
         const customOverlay = new window.kakao.maps.CustomOverlay({
           position: markerPosition,
           content: content,
