@@ -1,4 +1,6 @@
+import AddressSearch from '@/components/AddressSearch'
 import { CATEGORY_ARR, FOOD_CERTIFY_ARR, STORE_TYPE_ARR } from '@/data/store'
+import { StoreType } from '@/interface'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
@@ -9,8 +11,9 @@ export default function StoreNewPage() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm()
+  } = useForm<StoreType>()
 
   return (
     <form
@@ -109,25 +112,11 @@ export default function StoreNewPage() {
               </div>
             </div>
 
-            <div className="col-span-full">
-              <label
-                htmlFor="address"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                주소 (다음 주소 검색 API)
-              </label>
-              <div className="mt-2">
-                <input
-                  {...register('address', { required: true })}
-                  className="block w-full rounded-md border-0 py-1.5 px-2 outline-none text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-                {errors?.address?.type === 'required' && (
-                  <div className="pt-2 text-xs text-red-600">
-                    필수 입력사항입니다.
-                  </div>
-                )}
-              </div>
-            </div>
+            <AddressSearch
+              register={register}
+              errors={errors}
+              setValue={setValue}
+            />
 
             <div className="sm:col-span-2 sm:col-start-1">
               <label
@@ -189,6 +178,7 @@ export default function StoreNewPage() {
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <button
           type="button"
+          onClick={() => router.back()}
           className="text-sm font-semibold leading-6 text-gray-900"
         >
           뒤로가기
