@@ -32,7 +32,7 @@
 
 @media only screen and (max-width: 600px) {
   .navbar--mobile {
-    @apply fixed w-full text-white h-screen top-[52px] bg-blue-800;
+    @apply fixed w-full text-white h-screen top-[52px] bg-blue-800 z-[100];
   }
 
   .navbar__list {
@@ -52,7 +52,7 @@
   }
 
   .navbar__list--mobile {
-    @apply flex flex-col gap-4 px-[18px] py-[24px];
+    @apply flex flex-col gap-4 px-[18px] py-6;
   }
 }
 
