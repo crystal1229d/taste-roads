@@ -3,7 +3,10 @@ import { StoreApiResponse, StoreType } from '@/interface'
 import prisma from '@/db'
 import axios from 'axios'
 
-interface ResponseType {
+import { getServerSession } from 'next-auth'
+import { authOptions } from './auth/[...nextauth]'
+
+interface Responsetype {
   page?: string
   limit?: string
   q?: string
@@ -15,7 +18,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<StoreApiResponse | StoreType[] | StoreType | null>,
 ) {
-  const { page = '', limit = '', q, district, id }: ResponseType = req.query
+  const { page = '', limit = '', q, district, id }: Responsetype = req.query
+  const session = await getServerSession(req, res, authOptions)
 
   if (req.method === 'POST') {
     // 데이터 생성
@@ -34,6 +38,7 @@ export default async function handler(
     const result = await prisma.store.create({
       data: { ...formData, lat: data.documents[0].y, lng: data.documents[0].x },
     })
+
     return res.status(200).json(result)
   } else if (req.method === 'PUT') {
     // 데이터 수정
@@ -53,6 +58,7 @@ export default async function handler(
       where: { id: formData.id },
       data: { ...formData, lat: data.documents[0].y, lng: data.documents[0].x },
     })
+
     return res.status(200).json(result)
   } else if (req.method === 'DELETE') {
     // 데이터 삭제
@@ -94,6 +100,11 @@ export default async function handler(
         orderBy: { id: 'asc' },
         where: {
           id: id ? parseInt(id) : {},
+        },
+        include: {
+          likes: {
+            where: session ? { userId: session.user.id } : {},
+          },
         },
       })
 

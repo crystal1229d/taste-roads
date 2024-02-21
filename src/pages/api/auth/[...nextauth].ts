@@ -25,6 +25,21 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/users/login',
   },
+  callbacks: {
+    session: ({ session, token }) => ({
+      ...session,
+      user: {
+        ...session.user,
+        id: token.sub,
+      },
+    }),
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.sub = user.id
+      }
+      return token
+    },
+  },
 }
 
 export default NextAuth(authOptions)
