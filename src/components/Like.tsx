@@ -1,5 +1,5 @@
-import axios from 'axios'
 import { StoreType } from '@/interface'
+import axios from 'axios'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { useQuery } from 'react-query'
 
@@ -11,7 +11,7 @@ interface LikeProps {
 }
 
 export default function Like({ storeId }: LikeProps) {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
 
   const fetchStore = async () => {
     const { data } = await axios(`/api/stores?id=${storeId}`)
@@ -28,6 +28,7 @@ export default function Like({ storeId }: LikeProps) {
   )
 
   const toggleLike = async () => {
+    // 찜하기/찜취소 로직
     if (session?.user && store) {
       try {
         const like = await axios.post('/api/likes', {
@@ -43,12 +44,15 @@ export default function Like({ storeId }: LikeProps) {
       } catch (e) {
         console.log(e)
       }
+    } else if (status === 'unauthenticated') {
+      toast.warn('로그인 후 이용해주세요.')
     }
   }
 
   return (
     <button type="button" onClick={toggleLike}>
-      {store?.likes?.length ? (
+      {/* 로그인된 사용자가 좋아요를 눌렀다면? */}
+      {status === 'authenticated' && store?.likes?.length ? (
         <AiFillHeart className="hover:text-red-600 focus:text-red-600 text-red-500" />
       ) : (
         <AiOutlineHeart className="hover:text-red-600 focus:text-red-600" />
