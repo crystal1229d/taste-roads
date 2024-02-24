@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,18 +11,19 @@ datasource db {
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String?   @unique
-  name    String?
+  id        Int      @id @default(autoincrement())
+  email     String?   @unique
+  name      String?
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
   likes         Like[]
+  comments      Comment[]
 }
 
 model Store {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   phone     String?  // tel_no
   address   String?  // rdn_code_nm
   lat       String?  // y_dnts
@@ -27,8 +31,9 @@ model Store {
   name      String?  // upso_nm
   category  String?  // bizcnd_code_nm
   storeType String?  // cob_code_nm
-  foodCertifyName String? // crtfc_gbn_nm 
-  likes     Like[]
+  foodCertifyName String? // crtfc_gbn_nm
+  likes         Like[]
+  comments      Comment[]
 }
 
 model Like {
@@ -40,6 +45,18 @@ model Like {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@index([userId, storeId])
 }
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  storeId   Int
+  userId    Int
+  body      String
+  store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, storeId])
+}
+
 
 model Account {
   id                 String  @id @default(cuid())
@@ -68,6 +85,7 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
 
 model VerificationToken {
   identifier String
