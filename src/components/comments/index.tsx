@@ -36,13 +36,11 @@ export default function Comments({ storeId }: CommentProps) {
         <CommentForm storeId={storeId} refetch={refetch} />
       )}
       <CommentList comments={comments} />
-      {comments?.totalPage && (
-        <Pagination
-          total={comments?.totalPage}
-          page={page}
-          pathname={`/stores/${storeId}`}
-        />
-      )}
+      <Pagination
+        total={comments?.totalPage}
+        page={page}
+        pathname={`/stores/${storeId}`}
+      />
     </div>
   )
 }
