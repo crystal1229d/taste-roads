@@ -2,9 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { StoreApiResponse, StoreType } from '@/interface'
 import prisma from '@/db'
 import axios from 'axios'
-
 import { getServerSession } from 'next-auth'
-import { authOptions } from './auth/[...nextauth]'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
 interface Responsetype {
   page?: string
