@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useCallback, useEffect, useRef } from 'react'
 import Loading from '@/components/Loading'
 import { StoreType } from '@/interface'
@@ -7,7 +9,7 @@ import { useInfiniteQuery } from 'react-query'
 import useIntersectionObserver from '@/hooks/useIntersectionObserver'
 import Loader from '@/components/Loader'
 import SearchFilter from '@/components/SearchFilter'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useRecoilValue } from 'recoil'
 import { searchState } from '@/atom'
 
