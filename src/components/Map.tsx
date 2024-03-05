@@ -1,3 +1,5 @@
+'use client'
+
 import { locationState, mapState } from '@/atom'
 import Script from 'next/script'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
