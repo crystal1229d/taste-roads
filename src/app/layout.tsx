@@ -1,6 +1,8 @@
 import '@/styles/globals.css'
 import { NextProvider, NextLayout } from './providers'
 import { Metadata } from 'next'
+import { Suspense } from 'react'
+import FullPageLoader from '@/components/FullPageLoader'
 
 export const metadata: Metadata = {
   title: 'Fastcampus NextMap',
@@ -16,7 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <NextProvider>
-          <NextLayout>{children}</NextLayout>
+          <NextLayout>
+            <Suspense fallback={<FullPageLoader />}>{children}</Suspense>
+          </NextLayout>
         </NextProvider>
       </body>
     </html>
