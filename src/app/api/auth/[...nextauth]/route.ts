@@ -1,9 +1,11 @@
 import NextAuth, { NextAuthOptions } from 'next-auth'
+import { PrismaAdapter } from '@auth/prisma-adapter'
 import prisma from '@/db'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { Adapter } from 'next-auth/adapters'
+
 import GoogleProvider from 'next-auth/providers/google'
+import NaverProvider from 'next-auth/providers/naver'
 import KakaoProvider from 'next-auth/providers/kakao'
+import { Adapter } from 'next-auth/adapters'
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -16,6 +18,10 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+    }),
+    NaverProvider({
+      clientId: process.env.NAVER_CLIENT_ID || '',
+      clientSecret: process.env.NAVER_CLIENT_SECRET || '',
     }),
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID || '',
@@ -43,4 +49,5 @@ export const authOptions: NextAuthOptions = {
 }
 
 const handler = NextAuth(authOptions)
+
 export { handler as GET, handler as POST }
