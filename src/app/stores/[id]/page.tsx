@@ -21,7 +21,6 @@ interface ParamsProps {
 
 export default function StorePage({ params, searchParams }: ParamsProps) {
   const router = useRouter()
-  // const { id } = router.query
   const id = params.id
   const { status } = useSession()
 

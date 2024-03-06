@@ -5,12 +5,10 @@ import StoreList from '@/components/StoreList'
 import { LikeApiResponse, LikeInterface } from '@/interface'
 import axios from 'axios'
 import { useQuery } from 'react-query'
-import Pagination from '@/components/Pagination'
 import { useSearchParams } from 'next/navigation'
+import Pagination from '@/components/Pagination'
 
 export default function LikesPage() {
-  // const router = useRouter()
-  // const { page = '1' }: any = router.query
   const searchParams = useSearchParams()
   const page = searchParams?.get('page') || '1'
 
