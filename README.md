@@ -1,40 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align='center'>
 
-## Getting Started
+  <h2> 🗺️ Taste Roads 🍽️ </h2>
 
-First, run the development server:
+<a href=''>
+  <img src='https://img.shields.io/badge/license-MIT-red' alt='license' />
+  <img src='https://img.shields.io/badge/version-1.0.0-yellow' alt='license' />
+ </a>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<br /><br />
+
+</div>
+
+## About
+
+- 서비스명 : Taste Roads
+- 작업 기간 : 2024/02/02 - 2024/03/06
+- 출처
+  [패스트캠퍼스] 고성능 대규모 프론트엔드 10개 프로젝트 :
+  최적화부터 유지보수까지 한 번에 끝내는 초격차 패키지 Online
+  Course1 Part4. 맛집 앱
+
+<br />
+
+## Preview
+
+<br />
+
+## Features
+
+- 맛집 목록
+  - 지도에서 핀으로 표시
+    - 분류에 따른 아이콘으로 표시
+    - 클릭 시 인포 윈도우 띄우기
+    - 인포 윈도우에서 가게 상세정보로 이동
+  - 목록으로 표시
+    - 무한 스크롤
+    - 검색 (가게명, 지역)
+    - 클릭 시 상세정보로 이동
+- 지도에서 내 위치로 이동
+- 찜하기
+  - 맛집 찜하기 / 취소하기 (회원 전용)
+  - 찜한 맛집 목록
+- 댓글
+  - 가게에 댓글달기 (회원 전용)
+  - 내 댓글 삭제
+- 소셜 로그인 (Next Auth)
+  - Google
+  - Kakao
+- 마이페이지
+  - 내 정보
+  - 내가 쓴 댓글
+    - 해당 가게로 이동
+    - 내 댓글 삭제
+
+<br />
+
+## How to Start
+
+Use `yarn`
+
+```
+yarn
+
+yarn start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br />
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## License
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- # [`MIT License`]('./LICENSE')
