@@ -5,15 +5,13 @@ import Pagination from '@/components/Pagination'
 import CommentList from '@/components/comments/CommentList'
 import { CommentApiResponse } from '@/interface'
 import axios from 'axios'
+import { useSearchParams } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
 import { useQuery } from 'react-query'
 
-export default function Example({ params }: { params: { page: string } }) {
-  const { data: session } = useSession()
-
-  // const router = useRouter()
-  // const { page = '1' }: any = router.query
-  const page = params?.page || '1'
+export default function Mypage() {
+  const searchParams = useSearchParams()
+  const page = searchParams?.get('page') || '1'
 
   const fetchComments = async () => {
     const { data } = await axios(
@@ -28,6 +26,7 @@ export default function Example({ params }: { params: { page: string } }) {
     fetchComments,
   )
 
+  const { data: session } = useSession()
   return (
     <div className="md:max-w-5xl mx-auto px-4 py-8">
       <div className="px-4 sm:px-0">

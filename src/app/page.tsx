@@ -5,7 +5,6 @@ import CurrentLocationButton from '@/components/currentLocationButton'
 
 import { StoreType } from '@/interface'
 
-// export default function Home({ stores }: { stores: StoreType[] }) {
 export default async function Home() {
   const stores: StoreType[] = await getData()
 
@@ -34,11 +33,3 @@ async function getData() {
     console.log(e)
   }
 }
-
-// export async function getServerSideProps() {
-//   const stores = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/stores`)
-
-//   return {
-//     props: { stores: stores.data },
-//   }
-// }
