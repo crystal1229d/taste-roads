@@ -3,6 +3,7 @@ import { NextProvider, NextLayout } from './providers'
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 import FullPageLoader from '@/components/FullPageLoader'
+import GoogleAnalytics from './googleAnalytics'
 
 export const metadata: Metadata = {
   title: 'Fastcampus NextMap',
@@ -17,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <GoogleAnalytics GA_TRACKING_ID={process.env.NEXT_PUBLIC_GA_ID} />
         <NextProvider>
           <NextLayout>
             <Suspense fallback={<FullPageLoader />}>{children}</Suspense>
